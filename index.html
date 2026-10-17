@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Cổng thanh toán đóng quỹ lớp 2505QLNG.">
+    <title>Đóng Quỹ Lớp | 2505QLNG</title>
+    
+    <!-- Google Fonts: Đảm bảo font chữ sắc nét và chuyên nghiệp -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS VARIABLE SYSTEM */
+        :root {
+            /* Color Palette */
+            --color-primary: #2563EB;
+            --color-primary-hover: #1D4ED8;
+            --color-navy: #101B35;
+            --color-deep-navy: #17294B;
+            --color-background: #F4F7FC;
+            --color-surface: #FFFFFF;
+            --color-text-primary: #172033;
+            --color-text-secondary: #64748B;
+            --color-border: #E5EAF2;
+            --color-success: #16A34A;
+            --color-gold: #D6B778;
+            --color-soft-blue: #EAF2FF;
+            --color-error: #EF4444;
+
+            /* Spacing & Sizing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            
+            /* Border Radius */
+            --radius-sm: 12px;
+            --radius-md: 18px;
+            --radius-lg: 24px;
+            --radius-pill: 999px;
+
+            /* Shadows */
+            --shadow-card: 0 12px 32px rgba(16, 27, 53, 0.06);
+            --shadow-btn: 0 8px 16px rgba(37, 99, 235, 0.2);
+            --shadow-toast: 0 10px 25px rgba(0, 0, 0, 0.1);
+
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Typography */
+            --font-main: "Inter", "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            
+            /* Layout */
+            --max-width: 480px;
+        }
+
+        /* RESET & BASE */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        svg {
+            display: block;
+        }
+
+        button {
+            font-family: inherit;
+            border: none;
+            background: none;
+            cursor: pointer;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button:focus-visible {
+            box-shadow: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-primary);
+        }
+
+        /* LAYOUT & UTILITIES */
+        .app-container {
+            width: 100%;
+            max-width: var(--max-width);
+            padding: 0 var(--space-md);
+            margin: 0 auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: var(--space-xl);
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) 0;
+            margin-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--color-border);
+            animation: fadeIn var(--transition-normal);
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .brand-icon {
+            width: 28px;
+            height: 28px;
+            color: var(--color-primary);
+        }
+
+        .brand-text-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-code {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        .header-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--color-surface);
+            padding: 6px 12px;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--color-border);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--color-primary);
+            border-radius: 50%;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: var(--space-lg) 0 var(--space-md);
+            text-align: center;
+            animation: slideUp var(--transition-normal);
+        }
+
+        .hero h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: var(--space-xs);
+        }
+
+        .hero p {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* AMOUNT CARD (PREMIUM DESIGN) */
+        .amount-card {
+            background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-deep-navy) 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl) var(--space-lg);
+            color: var(--color-surface);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: var(--space-lg);
+            box-shadow: var(--shadow-card);
+            animation: slideUp var(--transition-normal) 50ms both;
+        }
+
+        /* Abstract Pattern for Card */
+        .amount-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+        }
+
+        .amount-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-xl);
+            position: relative;
+            z-index: 1;
+        }
+
+        .amount-card-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+        }
+
+        .amount-card-status {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-gold);
+            border: 1px solid rgba(214, 183, 120, 0.3);
+        }
+
+        .amount-card-value {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: var(--space-sm);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .amount-card-currency {
+            font-size: 24px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .amount-card-footer {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* QR CARD */
+        .qr-card {
+            background-color: var(--color-surface);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-card);
+            margin-bottom: var(--space-lg);
+            animation: slideUp var(--transition-normal) 100ms both;
+            border: 1px solid var(--color-border);
+            scroll-margin-top: 20px;
+        }
+
+        .qr-header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .qr-header h2 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .qr-header p {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .qr-image-wrapper {
+            background-color: var(--color-surface);
+            border: 1px dashed var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 280px;
+            margin-bottom: var(--space-lg);
+            position: relative;
+        }
+
+        .qr-image {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+
+        .qr-image.loaded {
+            opacity: 1;
+        }
+
+        .qr-loader {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--color-soft-blue);
+            border-top-color: var(--color-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .qr-error {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: absolute;
+            padding: var(--space-md);
+        }
+
+        .qr-error svg {
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+            width: 32px;
+            height: 32px;
+        }
+        
+        .qr-error-text {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .btn-retry {
+            background-color: var(--color-soft-blue);
+            color: var(--color-primary);
+            padding: 6px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            transition: background-color var(--transition-fast);
+        }
+
+        .btn-retry:active {
+            background-color: #dbe7ff;
+        }
+
+        /* TRANSFER INFO LIST */
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .info-value-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .info-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .info-value.tabular {
+            font-family: var(--font-main);
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-copy {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            color: var(--color-primary);
+            background-color: var(--color-soft-blue);
+            transition: all var(--transition-fast);
+        }
+
+        .btn-copy svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .btn-copy:active {
+            transform: scale(0.95);
+        }
+
+        .btn-copy.copied {
+            background-color: #DCFCE7;
+            color: var(--color-success);
+        }
+
+        /* INSTRUCTIONS */
+        .instructions {
+            margin-bottom: var(--space-lg);
+            animation: slideUp var(--transition-normal) 150ms both;
+        }
+
+        .instructions h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .instructions > p {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-md);
+        }
+
+        .step-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            position: relative;
+        }
+
+        .step-list::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 10px;
+            bottom: 20px;
+            width: 1px;
+            background-color: var(--color-border);
+            z-index: -1;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 12px;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--color-primary);
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .step-content {
+            padding-top: 6px;
+        }
+
+        .step-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        /* WARNING BOX */
+        .warning-box {
+            display: flex;
+            gap: 12px;
+            background-color: var(--color-soft-blue);
+            padding: var(--space-md);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--space-xl);
+            animation: slideUp var(--transition-normal) 200ms both;
+        }
+
+        .warning-icon {
+            color: var(--color-primary);
+            flex-shrink: 0;
+        }
+
+        .warning-text {
+            font-size: 13px;
+            color: var(--color-text-primary);
+            line-height: 1.6;
+        }
+
+        /* ACTIONS CTA */
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+            animation: slideUp var(--transition-normal) 250ms both;
+        }
+
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background-color: var(--color-primary);
+            color: var(--color-surface);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: var(--shadow-btn);
+            transition: background-color var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .btn-primary:active {
+            background-color: var(--color-primary-hover);
+            transform: scale(0.98);
+        }
+        
+        @media (hover: hover) {
+            .btn-primary:hover {
+                background-color: var(--color-primary-hover);
+            }
+        }
+
+        .btn-secondary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            border-radius: var(--radius-md);
+            transition: color var(--transition-fast), background-color var(--transition-fast);
+        }
+
+        .btn-secondary:active {
+            background-color: rgba(0,0,0,0.04);
+            color: var(--color-text-primary);
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--color-border);
+            animation: fadeIn var(--transition-normal) 300ms both;
+        }
+
+        .footer-brand {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-bottom: 2px;
+        }
+
+        /* TOAST NOTIFICATION */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .toast {
+            background-color: var(--color-text-primary);
+            color: var(--color-surface);
+            padding: 12px 20px;
+            border-radius: var(--radius-pill);
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: var(--shadow-toast);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all var(--transition-normal);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast svg {
+            color: var(--color-success);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* REDUCED MOTION PREFERENCE */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+        
+        /* TABLET & DESKTOP ADJUSTMENTS */
+        @media (min-width: 600px) {
+            .app-container {
+                padding-top: var(--space-lg);
+            }
+            .qr-image-wrapper {
+                padding: var(--space-xl);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-brand">
+                <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                    <path d="M12 12h.01"></path>
+                    <path d="M17 12h.01"></path>
+                    <path d="M7 12h.01"></path>
+                </svg>
+                <div class="brand-text-wrapper">
+                    <span class="brand-name">QUỸ LỚP</span>
+                    <span class="brand-code" id="display-class-code"></span>
+                </div>
+            </div>
+            <div class="header-status">
+                <span class="status-dot"></span>
+                THÔNG TIN ĐÓNG QUỸ
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+            <!-- HERO -->
+            <section class="hero">
+                <h1>Class Fund</h1>
+                <p>Lớp <span id="hero-class-code"></span></p>
+            </section>
+
+            <!-- AMOUNT CARD -->
+            <section class="amount-card">
+                <div class="amount-card-header">
+                    <span class="amount-card-label">ĐÓNG QUỸ ĐỊNH KỲ</span>
+                    <span class="amount-card-status">CHỜ THANH TOÁN</span>
+                </div>
+                <div class="amount-card-value">
+                    <span id="display-amount">0</span>
+                    <span class="amount-card-currency">đ</span>
+                </div>
+                <div class="amount-card-footer">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    Mã lớp: <span id="card-class-code"></span>
+                </div>
+            </section>
+
+            <!-- QR CARD -->
+            <section class="qr-card" id="qr-section">
+                <div class="qr-header">
+                    <h2>QUÉT MÃ QR ĐỂ THANH TOÁN</h2>
+                    <p>Sử dụng ứng dụng ngân hàng để quét mã QR và chuyển khoản nhanh chóng.</p>
+                </div>
+                
+                <div class="qr-image-wrapper">
+                    <div class="qr-loader" id="qr-loader"></div>
+                    <img id="qr-image" class="qr-image" src="" alt="Mã QR Chuyển Khoản" loading="eager">
+                    <div class="qr-error" id="qr-error">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <span class="qr-error-text">Không thể tải mã QR.<br>Vui lòng chuyển khoản thủ công bằng thông tin bên dưới.</span>
+                        <button class="btn-retry" onclick="loadQRCode()" aria-label="Thử tải lại QR">Thử lại</button>
+                    </div>
+                </div>
+
+                <div class="info-list">
+                    <!-- Ngân hàng -->
+                    <div class="info-item">
+                        <div>
+                            <div class="info-label">NGÂN HÀNG</div>
+                            <div class="info-value" id="info-bank"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chủ tài khoản -->
+                    <div class="info-item">
+                        <div>
+                            <div class="info-label">CHỦ TÀI KHOẢN</div>
+                            <div class="info-value" id="info-name"></div>
+                        </div>
+                    </div>
+
+                    <!-- Số tài khoản -->
+                    <div class="info-item">
+                        <div>
+                            <div class="info-label">SỐ TÀI KHOẢN</div>
+                            <div class="info-value tabular" id="info-account"></div>
+                        </div>
+                        <button class="btn-copy" onclick="copyData('account')" aria-label="Sao chép số tài khoản" id="btn-copy-account">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Số tiền -->
+                    <div class="info-item">
+                        <div>
+                            <div class="info-label">SỐ TIỀN</div>
+                            <div class="info-value tabular"><span id="info-amount"></span>đ</div>
+                        </div>
+                    </div>
+
+                    <!-- Nội dung -->
+                    <div class="info-item">
+                        <div>
+                            <div class="info-label">NỘI DUNG CHUYỂN KHOẢN</div>
+                            <div class="info-value tabular" id="info-content"></div>
+                        </div>
+                        <button class="btn-copy" onclick="copyData('content')" aria-label="Sao chép nội dung" id="btn-copy-content">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INSTRUCTIONS -->
+            <section class="instructions">
+                <h3>CÁCH ĐÓNG QUỸ</h3>
+                <p>Chỉ với 3 bước đơn giản.</p>
+                
+                <div class="step-list">
+                    <div class="step-item">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <div class="step-title">Mở ứng dụng ngân hàng</div>
+                            <div class="step-desc">Mở ứng dụng ngân hàng trên điện thoại hoặc sử dụng thiết bị khác để quét QR.</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <div class="step-title">Kiểm tra thông tin</div>
+                            <div class="step-desc">Kiểm tra ngân hàng, tên người nhận, số tài khoản, số tiền và nội dung chuyển khoản.</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <div class="step-title">Xác nhận chuyển khoản</div>
+                            <div class="step-desc">Hoàn tất giao dịch, sau đó quay lại website và nhấn nút xác nhận bên dưới.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WARNING BOX -->
+            <div class="warning-box">
+                <svg class="warning-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <div class="warning-text">
+                    Vui lòng kiểm tra chính xác thông tin người nhận và số tiền trước khi xác nhận giao dịch trên ứng dụng ngân hàng.
+                </div>
+            </div>
+
+            <!-- CTA ACTIONS -->
+            <div class="actions">
+                <a href="#" class="btn-primary" id="btn-confirm" onclick="openSheets(event)">
+                    TÔI ĐÃ CHUYỂN KHOẢN
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                <button class="btn-secondary" onclick="scrollToQR()">
+                    QUAY LẠI MÃ QR
+                </button>
+            </div>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-brand" id="footer-brand-name"></div>
+            <div class="footer-text">Cảm ơn bạn đã đóng góp và đồng hành cùng tập thể lớp.</div>
+            <div class="footer-text">Minh bạch – Trách nhiệm – Gắn kết.</div>
+        </footer>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /**
+         * 1. CẤU HÌNH HỆ THỐNG
+         * Đây là nguồn dữ liệu duy nhất (Single Source of Truth) cho toàn bộ UI.
+         */
+        const CONFIG = {
+            classCode: "2505QLNG",
+            fullClassCode: "2505QLNG025",
+            bankName: "MB Bank",
+            bankCode: "MB",
+            accountNumber: "9704229203196383882",
+            accountName: "Trần Bùi Nhựt Hy",
+            amount: 20000,
+            transferContent: "QUYLOP 2505QLNG",
+            spreadsheetUrl: "https://docs.google.com/spreadsheets/d/1dWwZIqIW9c3UO8jznaXXg7M_gH0mDo9Bu27AlxoHA5Y/edit?usp=sharing"
+        };
+
+        // Icons SVG
+        const ICON_COPY = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
+        const ICON_CHECK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+
+        /**
+         * 2. KHỞI TẠO VÀ RENDER GIAO DIỆN
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            renderData();
+            loadQRCode();
+        });
+
+        function renderData() {
+            // Định dạng tiền tệ VNĐ
+            const formattedAmount = new Intl.NumberFormat('vi-VN').format(CONFIG.amount);
+
+            // Cập nhật DOM
+            document.getElementById('display-class-code').textContent = CONFIG.fullClassCode;
+            document.getElementById('hero-class-code').textContent = CONFIG.classCode;
+            document.getElementById('card-class-code').textContent = CONFIG.classCode;
+            document.getElementById('display-amount').textContent = formattedAmount;
+            
+            document.getElementById('info-bank').textContent = CONFIG.bankName;
+            document.getElementById('info-name').textContent = CONFIG.accountName.toUpperCase();
+            document.getElementById('info-account').textContent = CONFIG.accountNumber;
+            document.getElementById('info-amount').textContent = formattedAmount;
+            document.getElementById('info-content').textContent = CONFIG.transferContent;
+            
+            document.getElementById('footer-brand-name').textContent = `QUỸ LỚP ${CONFIG.fullClassCode}`;
+            document.getElementById('btn-confirm').href = CONFIG.spreadsheetUrl;
+        }
+
+        /**
+         * 3. TẠO VÀ TẢI MÃ QR TỪ VIETQR
+         */
+        function loadQRCode() {
+            const qrImg = document.getElementById('qr-image');
+            const loader = document.getElementById('qr-loader');
+            const errorBox = document.getElementById('qr-error');
+
+            // Hiển thị trạng thái loading
+            loader.style.display = 'block';
+            errorBox.style.display = 'none';
+            qrImg.style.display = 'none';
+            qrImg.classList.remove('loaded');
+
+            // Tạo URL theo chuẩn VietQR
+            const safeContent = encodeURIComponent(CONFIG.transferContent);
+            const safeName = encodeURIComponent(CONFIG.accountName.toUpperCase());
+            const qrUrl = `https://img.vietqr.io/image/${CONFIG.bankCode}-${CONFIG.accountNumber}-compact2.png?amount=${CONFIG.amount}&addInfo=${safeContent}&accountName=${safeName}`;
+
+            // Xử lý sự kiện tải ảnh
+            qrImg.onload = () => {
+                loader.style.display = 'none';
+                qrImg.style.display = 'block';
+                // Đợi 1 chút để CSS transition hoạt động mượt
+                setTimeout(() => qrImg.classList.add('loaded'), 10);
+            };
+
+            qrImg.onerror = () => {
+                loader.style.display = 'none';
+                qrImg.style.display = 'none';
+                errorBox.style.display = 'flex';
+            };
+
+            // Kích hoạt tải ảnh
+            qrImg.src = qrUrl;
+        }
+
+        /**
+         * 4. CHỨC NĂNG SAO CHÉP (CLIPBOARD API & FALLBACK)
+         */
+        async function copyData(type) {
+            let textToCopy = '';
+            let btnElement = null;
+
+            if (type === 'account') {
+                textToCopy = CONFIG.accountNumber;
+                btnElement = document.getElementById('btn-copy-account');
+            } else if (type === 'content') {
+                textToCopy = CONFIG.transferContent;
+                btnElement = document.getElementById('btn-copy-content');
+            }
+
+            if (!textToCopy || !btnElement) return;
+
+            try {
+                // Thử dùng Clipboard API hiện đại
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(textToCopy);
+                    handleCopySuccess(btnElement);
+                } else {
+                    // Fallback cho trình duyệt cũ hoặc non-HTTPS
+                    fallbackCopyTextToClipboard(textToCopy, btnElement);
+                }
+            } catch (err) {
+                showToast('Không thể sao chép, vui lòng thử lại.');
+            }
+        }
+
+        function fallbackCopyTextToClipboard(text, btnElement) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            
+            // Tránh scroll khi focus
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    handleCopySuccess(btnElement);
+                } else {
+                    showToast('Không thể sao chép tự động.');
+                }
+            } catch (err) {
+                showToast('Trình duyệt không hỗ trợ sao chép.');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        function handleCopySuccess(btnElement) {
+            showToast('Đã sao chép thành công');
+            
+            // Hiệu ứng visual trên nút bấm
+            btnElement.innerHTML = ICON_CHECK;
+            btnElement.classList.add('copied');
+            
+            // Reset nút sau 2 giây
+            setTimeout(() => {
+                btnElement.innerHTML = ICON_COPY;
+                btnElement.classList.remove('copied');
+            }, 2000);
+        }
+
+        /**
+         * 5. HIỂN THỊ TOAST NOTIFICATION
+         */
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                ${message}
+            `;
+            
+            container.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => toast.classList.add('show'), 10);
+            
+            // Tự động xóa
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300); // Đợi CSS transition chạy xong
+            }, 3000);
+        }
+
+        /**
+         * 6. HỖ TRỢ ĐIỀU HƯỚNG
+         */
+        function scrollToQR() {
+            const qrSection = document.getElementById('qr-section');
+            if (qrSection) {
+                // Tôn trọng prefers-reduced-motion
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                qrSection.scrollIntoView({ 
+                    behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        function openSheets(event) {
+            event.preventDefault();
+            // Cố gắng mở tab mới
+            const newWindow = window.open(CONFIG.spreadsheetUrl, '_blank');
+            
+            // Xử lý trường hợp trình duyệt chặn popup
+            if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                showToast('Đang chuyển hướng...');
+                setTimeout(() => {
+                    window.location.href = CONFIG.spreadsheetUrl;
+                }, 500);
+            }
+        }
+    </script>
+</body>
+</html>
